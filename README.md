@@ -1,17 +1,39 @@
 ## 介绍
 
-Java8 于2014年首次发布GA版本，间隔上一个版本java7 有3年之久，所以更新幅度比较大，更新内容比较多。
+Java8 于2014年首次发布GA 版本，间隔上一个版本java7 有3年之久，所以更新幅度比较大，更新内容比较多。
 
-| 特性                     | 描述 |
-| ------------------------ | ---- |
-| Lambda 表达式            |      |
-| 方法引用                 |      |
-| 接口的默认方法           |      |
-| Stream API               |      |
-| Date Time API            |      |
-| Optional 类              |      |
-| Nashorn, JavaScript 引擎 |      |
-| 新工具（Base64等）       |      |
+- [接口默认方法](#接口默认方法) 
+- [Lambda 表达式](#Lambda 表达式) 
+  - 函数式接口
+  - Lambda
+- [方法引用](#方法引用)
+  - 使用场景
+  - 静态方法引用
+  - 类构造器引用
+  - 数组构造器引用
+  - 特定对象的实例方法引用
+  - 类的任意对象的实例方法引用
+- [Stream API](#Stream API)
+  - 流操作和管道
+  - 获取流
+  - 中间操作
+  - 终止操作
+  - 并行流
+- [Optional 容器类](#Optional 容器类)
+- [全新日期API](#全新日期API)
+- [重复注解支持](#重复注解支持)
+- [JVM](#JVM)
+  - 默认GC
+  - 移除Permgen
+  - 元空间MetaSpace
+- [CompletableFuture](#CompletableFuture)
+  - 异步回调
+  - Async后缀
+  - 多任务串行化执行
+  - 多任务并行化执行
+- [其他类库增强](#其他类库增强)
+  - [ConcurrentHashMap](#ConcurrentHashMap)
+  - [Base64](#Base64)
 
 注：
 
@@ -31,8 +53,6 @@ public interface Collection<E> extends Iterable<E> {
     }
 }
 ```
-
-
 
 ## Lambda 表达式
 
@@ -949,4 +969,6 @@ public static void testParallelExe()  throws Exception{
 ### Base64
 
 在Java8 中首次添加Base64 工具类，位于 `java.util` 包中。
+
+## README
 
