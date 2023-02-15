@@ -7,10 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 public class DateTimeDemo {
     public static void main(String[] args) {
-
+        test();
     }
-
-
     public static void test(){
         LocalDate d = LocalDate.now(); // 当前日期
         LocalTime t = LocalTime.now(); // 当前时间
@@ -33,13 +31,11 @@ public class DateTimeDemo {
         LocalTime localTime2 = LocalTime.parse("15:16:17");
 
         //如果要自定义输出的格式，或者要把一个非ISO 8601格式的字符串解析成LocalDateTime，可以使用新的DateTimeFormatter：
-        // 自定义格式化:
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         System.out.println(dtf.format(LocalDateTime.now()));
         // 用自定义格式解析:
         LocalDateTime dt2 = LocalDateTime.parse("2019-11-30 15:16:17", dtf);
         System.out.println(dt2);
-
     }
     public static void test2(){
         //LocalDateTime提供了对日期和时间进行加减的非常简单的链式调用：

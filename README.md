@@ -1,6 +1,6 @@
 ## 介绍
 
-Java8 于2014年首次发布GA 版本，间隔上一个版本java7 有3年之久，所以更新幅度比较大，更新内容比较多。
+Java8 于2014年首次发布GA 版本，距上一个版本java7 间隔3年之久，所以更新幅度比较大，更新内容比较多。
 
 - [接口默认方法](#接口默认方法) 
 - [Lambda表达式](#Lambda表达式) 
@@ -13,13 +13,13 @@ Java8 于2014年首次发布GA 版本，间隔上一个版本java7 有3年之久
   - 数组构造器引用
   - 特定对象的实例方法引用
   - 类的任意对象的实例方法引用
-- [Stream API](#Stream API)
+- [Stream API](#Stream_API)
   - 流操作和管道
   - 获取流
   - 中间操作
   - 终止操作
   - 并行流
-- [Optional 容器类](#Optional 容器类)
+- [Optional容器类](#Optional容器类)
 - [全新日期API](#全新日期API)
 - [重复注解支持](#重复注解支持)
 - [JVM](#JVM)
@@ -32,12 +32,10 @@ Java8 于2014年首次发布GA 版本，间隔上一个版本java7 有3年之久
   - 多任务串行化执行
   - 多任务并行化执行
 - [其他类库增强](#其他类库增强)
-  - [ConcurrentHashMap](#ConcurrentHashMap)
-  - [Base64](#Base64)
+  - ConcurrentHashMap
+  - Base64
 
-注：
-
-​	Java 新特性的规范都会在JSR中提出：https://jcp.org/en/jsr/overview
+注：相关示例代码已开源到GitHub：https://github.com/Jackpotsss/java8demo 
 
 ## 接口默认方法
 
@@ -380,7 +378,7 @@ public static void testClassMethod(){
 
 
 
-## Stream API
+## Stream_API
 
 ​	Stream API 是Java8 新引入的API，首先明确一点，Stream API 与 InputStream 和OutputStream 是完全不同的概念。Stream API 是对集合操作的增强，使之能够完成更高效的完成各种操作（过滤、排序、统计、分组），此外Stream API 与lambda 表达式结合使用会提高编码效率，并且提高可读性。
 
@@ -629,7 +627,7 @@ String[] result = s.parallel() // 变成一个可以并行处理的Stream
 
 ​	并行流底层基于并发包提供的Fork/Join 框架 ，将一个大任务拆分成多个子任务分别执行，多线程处理。可以充分利用CPU计算资源。
 
-## Optional 容器类
+## Optional容器类
 
 ​	Java 8引入了一个新的Optional类，这是一个可以为null的容器对象。如果值存在则 `isPresent()` 方法会返回true，调用`get()`方法会返回该对象。下面依次讲解该类的主要方法：
 
@@ -715,10 +713,58 @@ String[] result = s.parallel() // 变成一个可以并行处理的Stream
 - Month 的范围用1~12表示1月到12月；
 - Week 的范围用1~7表示周一到周日；
 
+示例：
 
+```java
+    public static void test(){
+        LocalDate d = LocalDate.now(); // 当前日期
+        LocalTime t = LocalTime.now(); // 当前时间
+        LocalDateTime dt = LocalDateTime.now(); // 当前日期和时间
+        System.out.println(d); // 严格按照ISO 8601格式打印
+        System.out.println(t);
+        System.out.println(dt);
 
-```
+        LocalDate localDate = dt.toLocalDate(); // 转换到当前日期
+        LocalTime localTime = dt.toLocalTime(); // 转换到当前时间
 
+        LocalDate localDate1 = localDate.of(2023, 1, 1);
+        LocalTime localTime1 = localTime.of(0, 0, 0);
+        LocalDateTime dateTime = LocalDateTime.of(2023,1,1,0,0,1);
+        LocalDateTime dateTime1 = LocalDateTime.of(localDate1, localTime1);
+
+        //注意ISO 8601规定的日期和时间分隔符是T
+        LocalDateTime localDateTime = LocalDateTime.parse("2019-11-19T15:16:17");
+        LocalDate localDate2 = LocalDate.parse("2019-11-19");
+        LocalTime localTime2 = LocalTime.parse("15:16:17");
+
+        //如果要自定义输出的格式，或者要把一个非ISO 8601格式的字符串解析成LocalDateTime，可以使用新的DateTimeFormatter：
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println(dtf.format(LocalDateTime.now()));
+        // 用自定义格式解析:
+        LocalDateTime dt2 = LocalDateTime.parse("2019-11-30 15:16:17", dtf);
+        System.out.println(dt2);
+        
+        //LocalDateTime提供了对日期和时间进行加减的非常简单的链式调用：
+        LocalDateTime dt = LocalDateTime.now();
+
+        LocalDateTime localDateTime = dt.plusDays(3)  //加3天
+                .minusHours(1)    //减1小时
+                .minusMonths(1);   //减1个月
+        //注意到调整月份时，会相应地调整日期，即把2019-10-31的月份调整为9时，日期也自动变为30
+
+        localDateTime.withYear(2022)   //调整年
+                .withMonth(12)      //调整月
+                .withDayOfMonth(1)  //调整日
+                .withHour(1)        //调整时
+                .withMinute(23)     //调整分
+                .withSecond(0);     //调整秒
+
+        //本月第一天0点0刻
+        LocalDateTime localDateTime1 = LocalDate.now().withDayOfMonth(1).atStartOfDay();
+        //使用isBefore和 isAfter 比较两个日期
+        boolean before = localDateTime.isBefore(localDateTime1);
+        boolean after = localDateTime.isAfter(localDateTime1);
+    }
 ```
 
 
@@ -774,11 +820,9 @@ Java8 默认的垃圾收集器是 `ParallelGC`，即 Parallel Scavenge + Paralle
 
 ​	在java8的 JVM中（Hotspot），移除了PermGen space， PermGen space的全称是Permanent Generation space,是指内存的永久保存区，这一部分用于存放 Class和 Meta的信息，Class在被加载的时候被放入PermGen space区域，它和和存放对象实例的 Heap区域不同，所以如果你的应用会加载很多 class ，就很可能出现PermGen space错误。如 `java.lang.OutOfMemoryError: PermGen space`。
 
-
-
 ### 元空间(MetaSpace)
 
-​	JDK8 HotSpot JVM 将移除永久区，使用**本地内存**来存储类元数据信息并称之为: 元空间(Metaspace)。
+JDK8 HotSpot JVM 将移除永久区，使用**本地内存**来存储类元数据信息并称之为: 元空间(Metaspace)。
 
 <img src="https://mikai-blog-image-service.oss-cn-beijing.aliyuncs.com/img/java8-jvm-1.png" alt="java8-jvm-1" style="zoom:80%;" />
 
@@ -788,7 +832,7 @@ Java8 默认的垃圾收集器是 `ParallelGC`，即 Parallel Scavenge + Paralle
 
 ## CompletableFuture
 
-​	JDK1.8新加入的功能特性，支持异步回调。Future 接口本身是不支持异步回调的，只能通过get() 方法阻塞获取异步结果。
+JDK1.8新加入的功能特性，支持异步回调。Future 接口本身是不支持异步回调的，只能通过get() 方法阻塞获取异步结果。
 
 ### 异步回调
 
@@ -879,8 +923,6 @@ ForkJoinPool.commonPool-worker-3 接收到上一个任务的处理结果为：2
 - thenRun：无输入，无输出
 - thenCompose：与thenAccept 类似，区别在于thenCompose用于连接两个CompletableFuture；
 
-
-
 ### 多任务并行化执行
 
 首先看下**两个异步任务**并行化执行的场景：
@@ -963,8 +1005,6 @@ public static void testParallelExe()  throws Exception{
 ### ConcurrentHashMap
 
 取消分段锁的实现，改为红黑树的数据结构
-
-
 
 ### Base64
 

@@ -28,7 +28,7 @@ public class MethodRefDemo {
         Comparator<Integer>  comparator2 = Integer::compare;
 
         List<Integer> integers = Arrays.asList(2, 3, 1, 7);
-        integers.sort(comparator);
+        integers.sort(comparator2);
 
         //示例2：
         Consumer<Car> carConsumer = Car::collide;
@@ -85,6 +85,7 @@ public class MethodRefDemo {
         //应用
         List< Car > cars = Arrays.asList(new Car());
         cars.forEach(car -> car.follow(new Car()));
+
         cars.forEach(car -> car.follow());     //无入参，无返回值
         cars.forEach(Car::follow);
     }
@@ -102,4 +103,7 @@ public class MethodRefDemo {
         void none();
     }
 
+    interface  Consumer4<T>{
+        void accept(T t);
+    }
 }
