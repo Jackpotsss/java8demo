@@ -3,7 +3,7 @@
 Java8 于2014年首次发布GA 版本，间隔上一个版本java7 有3年之久，所以更新幅度比较大，更新内容比较多。
 
 - [接口默认方法](#接口默认方法) 
-- [Lambda 表达式](#Lambda 表达式) 
+- [Lambda表达式](#Lambda表达式) 
   - 函数式接口
   - Lambda
 - [方法引用](#方法引用)
@@ -54,7 +54,7 @@ public interface Collection<E> extends Iterable<E> {
 }
 ```
 
-## Lambda 表达式
+## Lambda表达式
 
 ​	Lambda 表达式并不是Java中独有的概念，而是一个通用的概念，在C++、Python、JavaScript 等编程语言中都有支持。
 
