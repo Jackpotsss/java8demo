@@ -54,15 +54,15 @@ public interface Collection<E> extends Iterable<E> {
 
 ## Lambda表达式
 
-​	Lambda 表达式并不是Java中独有的概念，而是一个通用的概念，在C++、Python、JavaScript 等编程语言中都有支持。
+Lambda 表达式并不是Java中独有的概念，而是一个通用的概念，在C++、Python、JavaScript 等编程语言中都有支持。
 
-​	Java中的 Lambda 表达式 是用来精简代码的一种方式，使代码更加简洁。在学习Lambda 表达式之前，需要事先了解函数式接口。
+Java中的 Lambda 表达式 是用来精简代码的一种方式，使代码更加简洁。在学习Lambda 表达式之前，需要事先了解函数式接口。
 
 ### 函数式接口
 
-​	函数式接口首先必须是一个 interface，接口里面只能有一个抽象方法（允许有默认方法、静态方法）；
+　函数式接口首先必须是一个 interface，接口里面只能有一个抽象方法（允许有默认方法、静态方法）；
 
-​	`@FunctionalInterface` 注解用于标记当前接口是一个函数式接口，加上该注解，当你写的接口不符合函数式接口的定义时，编译器会报错。当然这不是必须的，如果接口类只有一个抽象方法，那么也算函数式接口。
+　`@FunctionalInterface` 注解用于标记当前接口是一个函数式接口，加上该注解，当你写的接口不符合函数式接口的定义时，编译器会报错。当然这不是必须的，如果接口类只有一个抽象方法，那么也算函数式接口。
 
 ```java
 @FunctionalInterface
@@ -108,11 +108,11 @@ boolean test(T t);
 
 注：
 
-​	在函数式接口中，抽象方法的名称已经不重要了，重要的是输入和输出分别是什么，即入参和返回值。
+　在函数式接口中，抽象方法的名称已经不重要了，重要的是输入和输出分别是什么，即入参和返回值。
 
 ### Lambda 
 
-​	Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中），使用 Lambda 表达式**可以使代码变的更加简洁紧凑**。Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。
+　Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中），使用 Lambda 表达式**可以使代码变的更加简洁紧凑**。Lambda 表达式免去了使用匿名方法的麻烦，并且给予Java简单但是强大的函数化的编程能力。
 
 以下是lambda表达式的重要特征:
 
@@ -164,7 +164,7 @@ boolean test(T t);
 
 **变量作用域** 
 
-​	lambda 表达式中可以读写全局变量，也可以读取外层的局部变量，但**不能修改外层的局部变量**，因为外部的局部变量隐式的具有final 语义：
+　lambda 表达式中可以读写全局变量，也可以读取外层的局部变量，但**不能修改外层的局部变量**，因为外部的局部变量隐式的具有final 语义：
 
 ```java
 public class LambdaDemo {
@@ -186,7 +186,7 @@ public class LambdaDemo {
 
 ## 方法引用
 
-​	首先理解为什么会有方法引用？方法引用是对lambda表达式的进一步简化（**满足特定前提条件下**）。方法引用使用一对冒号 **`::`** 表示，方法引用可以使语言的构造更紧凑简洁，减少冗余代码。
+　首先理解为什么会有方法引用？方法引用是对lambda表达式的进一步简化（**满足特定前提条件下**）。方法引用使用一对冒号 **`::`** 表示，方法引用可以使语言的构造更紧凑简洁，减少冗余代码。
 
 下面先看一个例子：
 
@@ -206,9 +206,9 @@ public class LambdaDemo {
     }
 ```
 
-​	上述代码第三个比较器 Comparator 中直接使用了静态方法`compare`的引用，用`Integer::compare`表示。因此，所谓方法引用，是指如果某个方法签名和函数接口恰好一致，就可以直接使用方法引用。
+　上述代码第三个比较器 Comparator 中直接使用了静态方法`compare`的引用，用`Integer::compare`表示。因此，所谓方法引用，是指如果某个方法签名和函数接口恰好一致，就可以直接使用方法引用。
 
-​	**方法签名一致指的是方法入参和返回值相同即可，其他的像方法名、修饰符等都无所谓**。
+　**方法签名一致指的是方法入参和返回值相同即可，其他的像方法名、修饰符等都无所谓**。
 
 上面代码Comparator接口的抽象方法为：
 
@@ -380,18 +380,18 @@ public static void testClassMethod(){
 
 ## Stream_API
 
-​	Stream API 是Java8 新引入的API，首先明确一点，Stream API 与 InputStream 和OutputStream 是完全不同的概念。Stream API 是对集合操作的增强，使之能够完成更高效的完成各种操作（过滤、排序、统计、分组），此外Stream API 与lambda 表达式结合使用会提高编码效率，并且提高可读性。
+　Stream API 是Java8 新引入的API，首先明确一点，Stream API 与 InputStream 和OutputStream 是完全不同的概念。Stream API 是对集合操作的增强，使之能够完成更高效的完成各种操作（过滤、排序、统计、分组），此外Stream API 与lambda 表达式结合使用会提高编码效率，并且提高可读性。
 
 ### 流操作和管道
 
-​	流操作分为**中间操作**和**终止操作**，它们组合在一起形成流**管道** Pipeline。 流管道由源（例如集合、数组、生成器函数或 I/O 通道）组成； 后跟零个或多个中间操作，例如 Stream.filter 或 Stream.map； 和一个终止操作，例如 Stream.forEach 或 Stream.reduce。
+　流操作分为**中间操作**和**终止操作**，它们组合在一起形成流**管道** Pipeline。 流管道由源（例如集合、数组、生成器函数或 I/O 通道）组成； 后跟零个或多个中间操作，例如 Stream.filter 或 Stream.map； 和一个终止操作，例如 Stream.forEach 或 Stream.reduce。
 
-​	中间操作返回一个新流。 他们总是懒惰执行； 执行诸如 filter() 之类的中间操作实际上并不执行任何过滤，而是创建一个新流，直到管道的终端操作被执行后才开始执行中间操作，中间操作不会影响源数据。
+　中间操作返回一个新流。 他们总是懒惰执行； 执行诸如 filter() 之类的中间操作实际上并不执行任何过滤，而是创建一个新流，直到管道的终端操作被执行后才开始执行中间操作，中间操作不会影响源数据。
 
-​	中间操作又分为**无状态操作**和**有状态操作**。 无状态操作，如 filter 和 map，在处理新元素时不保留先前看到的元素的状态——每个元素都可以独立于对其他元素的操作进行处理。 在处理新元素时，有状态操作可能会合并先前看到的元素的状态。有状态操作可能需要在产生结果之前处理整个输入。 例如，在看到流的所有元素之前，无法对流进行排序产生结果。 因此，在并行计算下，一些包含有状态中间操作的管道可能需要对数据进行多次传递，或者可能需要缓冲重要数据。 只包含无状态中间操作的流水线可以在单次通过中处理，无论是顺序的还是并行的，数据缓冲最少。
-​	此外，一些操作被认为是**短路操作**。 如果一个中间操作在有无限输入时可能会产生一个有限的流，那么它就是短路的。 如果终端操作在无限输入时可能在有限时间内终止，则该终端操作是短路的。
+　中间操作又分为**无状态操作**和**有状态操作**。 无状态操作，如 filter 和 map，在处理新元素时不保留先前看到的元素的状态——每个元素都可以独立于对其他元素的操作进行处理。 在处理新元素时，有状态操作可能会合并先前看到的元素的状态。有状态操作可能需要在产生结果之前处理整个输入。 例如，在看到流的所有元素之前，无法对流进行排序产生结果。 因此，在并行计算下，一些包含有状态中间操作的管道可能需要对数据进行多次传递，或者可能需要缓冲重要数据。 只包含无状态中间操作的流水线可以在单次通过中处理，无论是顺序的还是并行的，数据缓冲最少。
+　此外，一些操作被认为是**短路操作**。 如果一个中间操作在有无限输入时可能会产生一个有限的流，那么它就是短路的。 如果终端操作在无限输入时可能在有限时间内终止，则该终端操作是短路的。
 
-​	终止操作，例如 Stream.forEach 或 IntStream.sum，执行终端操作后，stream pipeline被认为消耗掉了，不能再使用； 如果需要再次遍历同一个数据源，则必须通过数据源获取新的流。 几乎在所有情况下，终端操作都是立即的，在返回之前完成对数据源的遍历和管道的处理。
+　终止操作，例如 Stream.forEach 或 IntStream.sum，执行终端操作后，stream pipeline被认为消耗掉了，不能再使用； 如果需要再次遍历同一个数据源，则必须通过数据源获取新的流。 几乎在所有情况下，终端操作都是立即的，在返回之前完成对数据源的遍历和管道的处理。
 
 ### 获取流
 
@@ -433,7 +433,7 @@ public void createStream(List<Student> students){
 
 #### 过滤
 
-​	`filter()`操作是对Stream 的所有元素进行迭代测试，不满足条件的就被过滤掉了，剩下的满足条件的元素就构成了一个新的Stream：
+　`filter()`操作是对Stream 的所有元素进行迭代测试，不满足条件的就被过滤掉了，剩下的满足条件的元素就构成了一个新的Stream：
 
 ```java
 Stream<T> filter(Predicate<? super T> predicate);
@@ -451,7 +451,7 @@ Stream<T> sorted(Comparator<? super T> comparator);
 
 distinct  去重
 
-​	对于有序流，不同元素的选择是稳定的(对于重复的元素，最先出现的元素被保留)。对于无序流，没有稳定性保证。=这是一个**有状态**的中间操作。
+　对于有序流，不同元素的选择是稳定的(对于重复的元素，最先出现的元素被保留)。对于无序流，没有稳定性保证。=这是一个**有状态**的中间操作。
 
 #### 限制条数
 
@@ -506,8 +506,6 @@ Stream<String> str = s.flatMap(List::stream);
 
 skip
 
-
-
 ### 终止操作
 
 #### 查找
@@ -536,8 +534,6 @@ public void test(List<Student> students){
 students.stream().forEach(System.out::println);
 ```
 
-
-
 #### 聚合
 
 - reduce()       把所有元素按照聚合函数聚合成一个结果
@@ -559,8 +555,6 @@ public void testReduce() {
 }
 ```
 
-
-
 **collect 收集**
 
 收集到指定集合中 collect(Collector)
@@ -572,8 +566,6 @@ public void testReduce() {
 //                .collect(Collectors.toList());  //收集到List中去
 //                .collect(Collectors.toCollection(HashSet::new)); //收集到HashSet中去;
 ```
-
-
 
 **count  计数** 
 
@@ -598,8 +590,6 @@ Stream<String> s = Stream.concat(s1, s2);
 List<String> list s.collect(Collectors.toList()); // [A, B, C, D, E]
 ```
 
-
-
 #### 匹配
 
 匹配是用来测试`Stream`的元素是否满足以下条件
@@ -614,7 +604,7 @@ boolean noneMatch(Predicate) 	//测试是否所有元素均不满足测试条件
 
 ### 并行流
 
-​	在集合元素数量非常大的情况，可以使用并行处理来加快处理速度。把一个普通`Stream`转换为可以并行处理的`Stream`非常简单，只需要用`parallel()`进行转换：
+　在集合元素数量非常大的情况，可以使用并行处理来加快处理速度。把一个普通`Stream`转换为可以并行处理的`Stream`非常简单，只需要用`parallel()`进行转换：
 
 ```java
 Stream<String> s = ...
@@ -623,13 +613,13 @@ String[] result = s.parallel() // 变成一个可以并行处理的Stream
                    .toArray(String[]::new);
 ```
 
-​	经过`parallel()`转换后的`Stream`只要可能，就会对后续操作进行并行处理。我们不需要编写任何多线程代码就可以享受到并行处理带来的执行效率的提升。
+　经过`parallel()`转换后的`Stream`只要可能，就会对后续操作进行并行处理。我们不需要编写任何多线程代码就可以享受到并行处理带来的执行效率的提升。
 
-​	并行流底层基于并发包提供的Fork/Join 框架 ，将一个大任务拆分成多个子任务分别执行，多线程处理。可以充分利用CPU计算资源。
+　并行流底层基于并发包提供的Fork/Join 框架 ，将一个大任务拆分成多个子任务分别执行，多线程处理。可以充分利用CPU计算资源。
 
 ## Optional容器类
 
-​	Java 8引入了一个新的Optional类，这是一个可以为null的容器对象。如果值存在则 `isPresent()` 方法会返回true，调用`get()`方法会返回该对象。下面依次讲解该类的主要方法：
+　Java 8引入了一个新的Optional类，这是一个可以为null的容器对象。如果值存在则 `isPresent()` 方法会返回true，调用`get()`方法会返回该对象。下面依次讲解该类的主要方法：
 
 - of
 - ofNullable
@@ -818,7 +808,7 @@ Java8 默认的垃圾收集器是 `ParallelGC`，即 Parallel Scavenge + Paralle
 
 ### 移除Permgen
 
-​	在java8的 JVM中（Hotspot），移除了PermGen space， PermGen space的全称是Permanent Generation space,是指内存的永久保存区，这一部分用于存放 Class和 Meta的信息，Class在被加载的时候被放入PermGen space区域，它和和存放对象实例的 Heap区域不同，所以如果你的应用会加载很多 class ，就很可能出现PermGen space错误。如 `java.lang.OutOfMemoryError: PermGen space`。
+　在java8的 JVM中（Hotspot），移除了PermGen space， PermGen space的全称是Permanent Generation space,是指内存的永久保存区，这一部分用于存放 Class和 Meta的信息，Class在被加载的时候被放入PermGen space区域，它和和存放对象实例的 Heap区域不同，所以如果你的应用会加载很多 class ，就很可能出现PermGen space错误。如 `java.lang.OutOfMemoryError: PermGen space`。
 
 ### 元空间(MetaSpace)
 
@@ -832,9 +822,32 @@ JDK8 HotSpot JVM 将移除永久区，使用**本地内存**来存储类元数�
 
 ## CompletableFuture
 
-JDK1.8新加入的功能特性，支持异步回调。Future 接口本身是不支持异步回调的，只能通过get() 方法阻塞获取异步结果。
+### 使用原因
+
+- CompletableFuture是由Java 8引入的，在Java8之前我们一般通过Future实现异步。Future用于表示异步计算的结果，只能通过**阻塞**或者**轮询**的方式获取结果，不支持设置回调方法，Java 8之前若要设置回调一般会使用 Google guava的 `ListenableFuture`，回调的引入又会导致臭名昭著的回调地狱。
+- CompletableFuture对Future进行了扩展，可以通过设置回调的方式处理异步计算结果，同时还支持通过函数式编程的方式对各类操作进行组合编排，并且一定程度上解决了回调地狱的问题。
+
+> 回调地狱：简单来说就是回调函数中嵌套回调函数的情况就叫做回调地狱，回调地狱就是为是实现代码顺序执行而出现的一种操作，它会造成我们的代码可读性非常差，后期不好维护。
+
+　　CompletableFuture实现了两个接口：Future、CompletionStage。Future表示异步计算的结果，CompletionStage 用于表示异步执行过程中的一个步骤（Stage）****，这个步骤可能是由另外一个CompletionStage触发的，随着当前步骤的完成，也可能会触发其他一系列CompletionStage的执行。从而我们可以根据实际业务对这些步骤进行多样化的编排组合，CompletionStage接口正是定义了这样的能力，我们可以通过其提供的thenAppy、thenCompose等函数式编程方法来组合编排这些步骤。
 
 ### 异步回调
+
+```java
+    public static void testCompleteCallback() throws Exception{
+        CompletableFuture.supplyAsync(() -> {
+                    doWork();
+                    System.out.println(Thread.currentThread().getName() + " 开始执行");
+                    return 1;
+                }).whenComplete((result, exception) -> {
+                    System.out.println("所有任务执行完成，返回结果： " + result);
+                });
+    }
+```
+
+
+
+### 多任务串行化执行
 
 串行化执行多个异步任务：
 
@@ -848,7 +861,7 @@ public static void testSerialExe1() throws Exception{
         },executorService).thenApply(integer -> {
             System.out.println(Thread.currentThread().getName()+" 接收到上一个任务的处理结果为："+integer);
             return integer+1;
-         }).thenApplyAsync(integer -> {
+         }).thenApply(integer -> {
              System.out.println(Thread.currentThread().getName()+" 接收到上一个任务的处理结果为："+integer);
              return integer+10;
          }).whenComplete((result,exception)->{
@@ -864,29 +877,10 @@ public static void testSerialExe1() throws Exception{
 
 - supplyAsync：开始异步任务，方法需要一个 Supplier函数，无输入，有输出
 - thenApply：上一个异步任务执行完之后，拿到返回结果作为入参，继续执行新任务，方法需要Function函数，有输入，有输出
-- thenApplyAsync：与 thenApply 的不同之处是，在其他线程池获取线程异步执行，而不是使用当前线程；
 - whenComplete： 所有任务执行完成之后的回调，入参中有返回结果和异常信息；
 - exceptionally：专门处理异常信息的回调方法；
 
-### Async后缀
 
-上面的示例，控制台打印：
-
-```
-pool-1-thread-1 开始执行
-pool-1-thread-1 接收到上一个任务的处理结果为：1
-ForkJoinPool.commonPool-worker-3 接收到上一个任务的处理结果为：2
-所有任务执行完成，返回结果： 12
-```
-
-可以看出前两个异步任务使用的是指定线程池中的线程，而使用 async 后缀的操作，使用的是默认线程池（ForkJoinPool）中的线程。
-
-注意CompletableFuture 的命名规则：
-
-- `xxx()`：表示将使用已有的线程继续执行；
-- `xxxAsync()`：表示将异步在线程池中执行。
-
-### 多任务串行化执行
 
 上面已经展示了多任务串行化执行的demo，还有以下几种执行链式调用的方法，主要区别在于有无输入和输出：
 
@@ -923,6 +917,31 @@ ForkJoinPool.commonPool-worker-3 接收到上一个任务的处理结果为：2
 - thenRun：无输入，无输出
 - thenCompose：与thenAccept 类似，区别在于thenCompose用于连接两个CompletableFuture；
 
+
+
+### Async异步执行与线程池
+
+#### 线程情况
+
+我们看一下CompletableFuture的执行线程情况。
+
+CompletableFuture实现了CompletionStage接口，通过丰富的回调方法，支持各种组合操作，每种组合场景都有同步和异步两种方法。
+
+同步方法（即不带Async后缀的方法）有两种情况:
+
+- 如果注册时被依赖的操作已经执行完成，则直接由当前线程执行。
+- 如果注册时被依赖的操作还未执行完，则由回调线程执行。
+
+异步方法（即带Async后缀的方法）：
+
+- 可以选择是否传递线程池参数Executor运行在指定线程池中；当不传递Executor时，会使用ForkJoinPool中的共用线程池CommonPool（CommonPool的大小是CPU核数-1，如果是IO密集的应用，线程数可能成为瓶颈）。
+
+#### 异步回调要传线程池
+
+　　前面提到，异步回调方法可以选择是否传递线程池参数Executor，这里我们建议**强制传线程池，且根据实际情况做线程池隔离**。
+
+　　当不传递线程池时，会使用ForkJoinPool中的公共线程池CommonPool，这里所有调用将共用该线程池，核心线程数=处理器数量-1（单核核心线程数为1），所有异步回调都会共用该CommonPool，核心与非核心业务都竞争同一个池中的线程，很容易成为系统瓶颈。手动传递线程池参数可以更方便的调节参数，并且可以给不同的业务分配不同的线程池，以求资源隔离，减少不同业务之间的相互干扰。
+
 ### 多任务并行化执行
 
 首先看下**两个异步任务**并行化执行的场景：
@@ -948,7 +967,7 @@ ForkJoinPool.commonPool-worker-3 接收到上一个任务的处理结果为：2
     }     
 ```
 
-​	`thenAcceptBoth` 和 `thenCombine` 都是等待两个`CompletionStage` 任务执行完成后，拿到两个返回结果后统一处理；唯一的区别是thenAcceptBoth 本身无有返回值，thenCombine 有返回值；
+　　`thenAcceptBoth` 和 `thenCombine` 都是等待两个`CompletionStage` 任务执行完成后，拿到两个返回结果后统一处理；唯一的区别是thenAcceptBoth 本身无有返回值，thenCombine 有返回值；
 
 多个异步任务 并行化执行: anyof, allof
 
@@ -978,9 +997,9 @@ ForkJoinPool.commonPool-worker-3 接收到上一个任务的处理结果为：2
     }
 ```
 
-​	`anyOf()`表示只要任意一个异步任务执行成功，就进行下一步，`allOf()` 表示必须全部的异步任务执行成功，才能进行下一步，这些组合操作可以实现非常复杂的异步流程控制。
+　　`anyOf()`表示只要任意一个异步任务执行成功，就进行下一步，`allOf()` 表示必须全部的异步任务执行成功，才能进行下一步，这些组合操作可以实现非常复杂的异步流程控制。
 
-​	上面 allOf 的示例，在thenAccept 的方法入参中并不能拿到所有异步任务的执行结果，CompletableFuture 的设计中并没有直接提供，要想获取所有异步任务的返回结果，还需要编写一些额外代码：
+　　上面 allOf 的示例，在thenAccept 的方法入参中并不能拿到所有异步任务的执行结果，CompletableFuture 的设计中并没有直接提供，要想获取所有异步任务的返回结果，还需要编写一些额外代码：
 
 ```java
 public static void testParallelExe()  throws Exception{
@@ -998,6 +1017,57 @@ public static void testParallelExe()  throws Exception{
 
 注：Java9中的 CompletableFuture还添加了`completeOnTimeout`、`orTimeout` 等关于超时的方法，方便对超时任务的处理。
 
+### 超时处理
+
+Java9开始支持CompletableFuture 的超时处理操作：
+
+```java
+public static void testTimeout() throws Exception{
+        //completeOnTimeout:超过指定时间后，返回给定的值，不抛异常
+        CompletableFuture.supplyAsync(() -> {
+                    doWork();
+                    System.out.println(Thread.currentThread().getName() + " 开始执行");
+                    return 1;
+                },executorService).completeOnTimeout(-1, 100L, TimeUnit.MILLISECONDS)
+                .whenComplete((result, exception) -> {
+                    System.out.println("所有任务执行完成，返回结果： " + result);
+                });
+        //orTimeout:超过指定时间后，抛异常 TimeoutException
+        CompletableFuture.supplyAsync(() -> {
+                    doWork();
+                    System.out.println(Thread.currentThread().getName() + " 开始执行");
+                    return 1;
+                },executorService).orTimeout(10L, TimeUnit.MILLISECONDS)
+                .whenComplete((result, exception) -> {
+                    System.out.println("所有任务执行完成，返回结果： " + result);
+                    if(exception!=null) exception.printStackTrace();
+                });
+    }
+```
+
+### 总结
+
+常用API方法总结：
+
+| 方法              | 描述                                                         | 输入输出       |
+| ----------------- | ------------------------------------------------------------ | -------------- |
+| supplyAsync       | 表示开始执行异步任务                                         | 无输入，有输出 |
+| runAsync          | 表示开始执行异步任务                                         | 无输入，无输出 |
+| thenAccept        | 上一个任务执行完成后继续执行新任务，可接收上一个任务的处理结果 | 有输入，无输出 |
+| thenRun           | 上一个任务执行完成后继续执行新任务                           | 无输入，无输出 |
+| thenApply         | 上一个任务执行完成后继续执行新任务                           | 有输入，有输出 |
+| thenCompose       | 同上，与thenApply的区别在于他的入参是CompletableFuture，<br />用于串行连接两个CompletableFuture | 有输入，有输出 |
+| thenAcceptBoth    | 两个任务都执行完成，可以得到两个返回结果，本身无返回值       | 有输入，无输出 |
+| thenCombine       | 同上，区别在于它本身有返回值；                               | 有输入，有输出 |
+| whenComplete      | 所有任务执行完成后或发生异常时调用                           | 有输入，无输出 |
+| exceptionally     | 当发生异常时调用                                             | 有输入，有输出 |
+| anyof             | 用于并行执行异步任务，任意一个任务执行成功就返回，并且可以拿到返回结果 |                |
+| allOf             | 用于并行执行异步任务，所有任务都执行成功才能继续执行         |                |
+| completeOnTimeout | 超过指定时间后，返回给定的值，不抛异常                       |                |
+| orTimeout         | 超过指定时间后，抛异常                                       |                |
+
+
+
 ## 其他类库增强
 
 
@@ -1012,3 +1082,10 @@ public static void testParallelExe()  throws Exception{
 
 ## README
 
+修订：
+
+　　我是沙律君	2023-02-20	补充CompletableFuture 异步编程相关内容
+
+参考：
+
+　　[CompletableFuture原理与实践-外卖商家端API的异步化【美团技术团队】](https://mp.weixin.qq.com/s/GQGidprakfticYnbVYVYGQ) 
